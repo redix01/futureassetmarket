@@ -8,11 +8,36 @@ toggleButton.onclick = function () {
 
 // Sidebar Dropdown toggle
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll(".sidebar .nav-link").forEach(function (element) {
+  // Handle stock dropdown toggle
+  const stockDropdownToggle = document.querySelector('.stock-dropdown-toggle');
+  if (stockDropdownToggle) {
+    stockDropdownToggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      const submenu = document.getElementById('stockSubmenu');
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      
+      if (isExpanded) {
+        // Close the dropdown
+        this.setAttribute('aria-expanded', 'false');
+        submenu.classList.remove('show');
+        submenu.style.maxHeight = '0';
+        submenu.style.opacity = '0';
+      } else {
+        // Open the dropdown
+        this.setAttribute('aria-expanded', 'true');
+        submenu.classList.add('show');
+        submenu.style.maxHeight = submenu.scrollHeight + 'px';
+        submenu.style.opacity = '1';
+      }
+    });
+  }
+
+  // Handle other sidebar dropdowns
+  document.querySelectorAll(".sidebar .nav-link:not(.stock-dropdown-toggle)").forEach(function (element) {
     element.addEventListener("click", function (e) {
       let nextEl = element.nextElementSibling;
       let parentEl = element.parentElement;
-      if (nextEl) {
+      if (nextEl && nextEl.classList.contains('collapse')) {
         e.preventDefault();
         let mycollapse = new bootstrap.Collapse(nextEl);
 
@@ -29,13 +54,29 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
       }
-      if (nextEl.classList.contains("show")) {
+      if (nextEl && nextEl.classList.contains("show")) {
         element.classList.add("opened");
       } else {
         element.classList.remove("opened");
       }
     });
   });
+
+  // Handle active state for stock dropdown parent
+  const stockSubmenu = document.getElementById('stockSubmenu');
+  if (stockSubmenu) {
+    const activeSubmenuItem = stockSubmenu.querySelector('.nav-link.active');
+    if (activeSubmenuItem) {
+      const stockDropdownToggle = document.querySelector('.stock-dropdown-toggle');
+      if (stockDropdownToggle) {
+        stockDropdownToggle.classList.add('active');
+        stockDropdownToggle.setAttribute('aria-expanded', 'true');
+        stockSubmenu.classList.add('show');
+        stockSubmenu.style.maxHeight = stockSubmenu.scrollHeight + 'px';
+        stockSubmenu.style.opacity = '1';
+      }
+    }
+  }
 });
 
 // Get Current Date

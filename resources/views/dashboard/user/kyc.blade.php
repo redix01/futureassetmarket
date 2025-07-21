@@ -86,9 +86,9 @@
                                     <label class="form-label">ID Type</label>
                                     <select name="id_type" class="form-select" required>
                                         <option value="">Select ID Type</option>
-                                        <option value="passport">Passport</option>
-                                        <option value="national_id">National ID</option>
-                                        <option value="driver_license">Driver’s License</option>
+                                        <option value="passport" {{ old('id_type', $user->id_type) == 'passport' ? 'selected' : '' }}>Passport</option>
+                                        <option value="national_id" {{ old('id_type', $user->id_type) == 'national_id' ? 'selected' : '' }}>National ID</option>
+                                        <option value="driver_license" {{ old('id_type', $user->id_type) == 'driver_license' ? 'selected' : '' }}>Driver's License</option>
                                     </select>
                                 </div>
 

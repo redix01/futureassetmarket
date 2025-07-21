@@ -93,5 +93,28 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new CustomVerifyEmail);
     }
 
+    public function getIdImage1UrlAttribute()
+    {
+        if ($this->id_image_1) {
+            return asset('storage/' . $this->id_image_1);
+        }
+        return null;
+    }
+
+    public function getIdImage2UrlAttribute()
+    {
+        if ($this->id_image_2) {
+            return asset('storage/' . $this->id_image_2);
+        }
+        return null;
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        if ($this->avatar) {
+            return asset('storage/' . $this->avatar);
+        }
+        return asset('img/user/default-avatar.png');
+    }
 
 }

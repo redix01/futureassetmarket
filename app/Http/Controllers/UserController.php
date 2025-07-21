@@ -66,7 +66,7 @@ class UserController extends Controller
 
         $crypto = CryptoExchange::where('user_id', auth()->id())->sum('amount');
         return view('dashboard.index', compact('user', 'withdrawal', 'deposit',
-            'totalCurrentValue', 'crypto'));
+            'totalCurrentValue', 'totalInvested', 'crypto', 'stocks'));
     }
 
     public function profile()
@@ -155,11 +155,11 @@ class UserController extends Controller
         ]));
 
         if ($request->hasFile('id_image_1')) {
-            $user->id_image_1 = $request->file('id_image_1')->store('files');
+            $user->id_image_1 = $request->file('id_image_1')->store('files', 'public');
         }
 
         if ($request->hasFile('id_image_2')) {
-            $user->id_image_2 = $request->file('id_image_2')->store('files');
+            $user->id_image_2 = $request->file('id_image_2')->store('files', 'public');
         }
 
 

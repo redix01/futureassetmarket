@@ -149,14 +149,57 @@
                             <span class="data-value">{{ $user->id_type ?? 'Not Set' }}</span>
                         </div>
                     </div>
-                    <div class="row">
-                     <div class="col m-3">
-                        <h6>ID image Front</h6>
-                        <img src="{{ asset($user->id_image_1) }}" height="250" width="240" alt="{{ $user->name }}">
+                    <div class="data-item">
+                        <div class="data-col">
+                            <span class="data-label">KYC Status</span>
+                            <span class="data-value">
+                                @if($user->id_image_1 && $user->id_type)
+                                    @if($user->status > 1)
+                                        <span class="badge bg-success">Verified</span>
+                                    @else
+                                        <span class="badge bg-info">Documents Submitted</span>
+                                        <a href="{{ route('admin.verifyUser', $user->id) }}" class="btn btn-sm btn-success ms-2">Verify KYC</a>
+                                    @endif
+                                @else
+                                    <span class="badge bg-warning">Pending</span>
+                                @endif
+                            </span>
+                        </div>
                     </div>
-                    <div class="col m-3">
-                        <h6>ID image Back</h6>
-                        <img src="{{ asset($user->id_image_2) }}" height="250" width="240" alt="{{ $user->name }}">
+                    <div class="row mt-3">
+                     <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">ID Image Front</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                @if($user->id_image_1_url)
+                                    <img src="{{ $user->id_image_1_url }}" height="250" width="240" alt="{{ $user->name }}" class="img-fluid border rounded shadow-sm">
+                                    <div class="mt-2">
+                                        <a href="{{ $user->id_image_1_url }}" target="_blank" class="btn btn-sm btn-outline-primary">View Full Size</a>
+                                    </div>
+                                @else
+                                    <div class="alert alert-warning mb-0">No front ID image uploaded</div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">ID Image Back</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                @if($user->id_image_2_url)
+                                    <img src="{{ $user->id_image_2_url }}" height="250" width="240" alt="{{ $user->name }}" class="img-fluid border rounded shadow-sm">
+                                    <div class="mt-2">
+                                        <a href="{{ $user->id_image_2_url }}" target="_blank" class="btn btn-sm btn-outline-primary">View Full Size</a>
+                                    </div>
+                                @else
+                                    <div class="alert alert-info mb-0">No back ID image uploaded</div>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                     </div>
                 </div><!-- .nk-data -->
