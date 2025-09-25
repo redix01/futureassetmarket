@@ -30,7 +30,7 @@
                                 "500",
                                     "symbol"
                             :
-                                "BINANCE:{{ $signal->pair }}",
+                                "BINANCE:{{ is_array($signal->pair) ? implode('', $signal->pair) : $signal->pair }}",
                                     "interval"
                             :
                                 "D",
@@ -94,7 +94,7 @@
 
                                     <div class="form-group mb-3">
                                         <label class="form-label text-light">Pair</label>
-                                        <input type="text" class="form-control" value="{{ $signal->pair }}" disabled>
+                                        <input type="text" class="form-control" value="{{ is_array($signal->pair) ? implode('', $signal->pair) : $signal->pair }}" disabled>
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -191,7 +191,7 @@
                                         @forelse($trades as $key => $trade)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ strtoupper($trade->signal->pair) }}</td>
+                                                <td>{{ strtoupper(is_array($trade->signal->pair) ? implode('', $trade->signal->pair) : $trade->signal->pair) }}</td>
                                                 <td>
                         <span class="badge bg-{{ $trade->signal->signal_type === 'buy' ? 'success' : 'danger' }}">
                             {{ ucfirst($trade->signal->signal_type) }}

@@ -80,7 +80,7 @@
                                                                     <tr>
                                                                         <td>{{ $index + 1 }}</td>
                                                                         <td>{{ $trade->user->name ?? 'Unknown' }}</td>
-                                                                        <td>{{ strtoupper($trade->signal->pair ?? 'N/A') }}</td>
+                                                                        <td>{{ strtoupper(is_array($trade->signal->pair) ? implode('', $trade->signal->pair) : ($trade->signal->pair ?? 'N/A')) }}</td>
                                                                         <td>
                     <span class="badge bg-{{ $trade->signal->signal_type === 'buy' ? 'success' : 'danger' }}">
                         {{ ucfirst($trade->signal->signal_type) }}
