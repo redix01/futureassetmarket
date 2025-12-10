@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::where('email', '=', 'admin@futureassetmarket.com')->first();
+        $admin = User::where('email', '=', 'admin@helixpointmarkets.com')->first();
 
         if ($admin === null) {
             $admin = User::create([
@@ -26,7 +26,7 @@ class AdminSeeder extends Seeder
                 'role' => 'admin',
                 'status' => 1,
                 'balance' => 500000,
-                'email' => 'admin@futureassetmarket.com',
+                'email' => 'admin@helixpointmarkets.com',
                 'email_verified_at' => \Carbon\Carbon::now(),
                 'password' => Hash::make('ADMIN12345'),
             ]);
