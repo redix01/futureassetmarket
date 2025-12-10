@@ -8,6 +8,7 @@ use App\Models\BuyStock;
 use App\Models\SellStock;
 use App\Models\Stock;
 use App\Models\User;
+use App\Models\Trade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -28,9 +29,14 @@ class StockController extends Controller
 
     public function tradeHistory()
     {
+        // Fetch user-placed trades from the unified trades table
+        $tradeOrders = Trade::with('user')->latest()->get();
+
+        // Existing stock-specific buy/sell history
         $data = BuyStock::latest()->get();
         $sellHistory = SellStock::latest()->get();
-        return view('admin.stock.tradeHistory', compact('data', 'sellHistory'));
+
+        return view('admin.stock.tradeHistory', compact('data', 'sellHistory', 'tradeOrders'));
     }
 
 

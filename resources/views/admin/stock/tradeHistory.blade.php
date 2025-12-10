@@ -10,6 +10,9 @@
                         <h4>Stock Orders</h4>
                         <ul class="nav nav-tabs">
                                 <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#tabItem0">Trade Room Orders</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="tab" href="#tabItem1">Buy History</a>
                                 </li>
                                 <li class="nav-item">
@@ -18,6 +21,62 @@
 
                             </ul>
                             <div class="tab-content">
+                                <div class="tab-pane" id="tabItem0">
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-lg-12">
+                                            <div class="card card-bordered card-preview">
+                                                <div class="card-inner">
+                                                    <h4 class="m-3">Trade Room Orders</h4>
+
+                                                    <div class="m-3">
+                                                        @if ($errors->any())
+                                                            <div class="alert alert-danger">
+                                                                <ul>
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <li>{{ $error }}</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        @endif
+                                                        @if(session()->has('success'))
+                                                            <div class="alert alert-success">
+                                                                {{ session()->get('success') }}
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                      <div class="table-responsive">
+                                                            <table class="table ">
+                                                               <thead >
+                                                               <tr>
+                                                                   <th>Date</th>
+                                                                    <th>User</th>
+                                                                    <th>Market</th>
+                                                                    <th>Pair</th>
+                                                                    <th>Type</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Status</th>
+                                                               </tr>
+                                                               </thead>
+                                                               <tbody >
+                                                               @foreach($tradeOrders as $item)
+                                                                   <tr>
+                                                                       <td>{{ date('d M, Y h:i A', strtotime($item->created_at)) ?? '' }}</td>
+                                                                       <td>{{ $item->user->name ?? '' }}</td>
+                                                                       <td>{{ $item->market ?? '' }}</td>
+                                                                       <td>{{ $item->tradePair() ?? '' }}</td>
+                                                                       <td>{{ strtoupper($item->trade_type ?? '') }}</td>
+                                                                       <td>${{ number_format($item->amount, 2) ?? ''}}</td>
+                                                                       <td>{!! $item->status() !!}</td>
+                                                                   </tr>
+                                                               @endforeach
+                                                               </tbody>
+                                                           </table>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="tab-pane active" id="tabItem1">
                                     <div class="row g-3 mb-3">
                                         <div class="col-lg-12">
