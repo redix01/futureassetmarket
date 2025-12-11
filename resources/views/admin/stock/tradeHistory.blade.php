@@ -197,7 +197,7 @@
                                                                             <p><strong>Stock:</strong> {{ $item->stock->symbol ?? '' }}</p>
                                                                             <p><strong>Amount:</strong> ${{ number_format($item->amount, 2) }}</p>
                                                                             <p><strong>Current PNL:</strong> {{ number_format($item->pnl ?? 0, 2) }}%</p>
-                                                                            <form action="{{ route('admin.closeTrade', $item->id) }}" method="POST" class="mt-3">
+                                                                            <form action="{{ route('admin.closeStockTrade', $item->id) }}" method="POST" class="mt-3">
                                                                                 @csrf
                                                                                 @method('PUT')
                                                                                 <div class="form-group">
