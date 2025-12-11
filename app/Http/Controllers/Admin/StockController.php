@@ -33,7 +33,7 @@ class StockController extends Controller
         $tradeOrders = Trade::with('user')->latest()->get();
 
         // Existing stock-specific buy/sell history
-        $data = BuyStock::latest()->get();
+        $data = BuyStock::with(['user', 'stock'])->latest()->get();
         $sellHistory = SellStock::latest()->get();
 
         return view('admin.stock.tradeHistory', compact('data', 'sellHistory', 'tradeOrders'));
@@ -58,5 +58,38 @@ class StockController extends Controller
         $data = SellStock::find($id);
         $data->delete();
         return redirect()->back()->with('success', 'Stock has been deleted');
+    }
+
+    /**
+     * Update trade PNL (Profit or Loss)
+     */
+    public function updateTradePnl(Request $request, $id)
+    {
+        $request->validate([
+            'pnl' => 'required|numeric',
+        ]);
+
+        $trade = BuyStock::findOrFail($id);
+        $trade->pnl = $request->pnl;
+        $trade->save();
+
+        return redirect()->back()->with('success', 'Trade PNL updated successfully!');
+    }
+
+    /**
+     * Close a trade (change status from Live to Cancelled)
+     */
+    public function closeTrade($id)
+    {
+        $trade = BuyStock::findOrFail($id);
+        
+        // Only allow closing if trade is currently Live (status = 2)
+        if ($trade->status == 2) {
+            $trade->status = 0; // Set to Cancelled
+            $trade->save();
+            return redirect()->back()->with('success', 'Trade closed successfully!');
+        }
+
+        return redirect()->back()->with('error', 'Only live trades can be closed.');
     }
 }

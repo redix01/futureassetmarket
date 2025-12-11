@@ -125,9 +125,16 @@
                                                                         </td>
                                                                        <td>{!! $item->status() !!}</td>
                                                                        <td>
-                                                                        <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm-{{ $item->id }}">
-                                                                           <em class=" ni ni-edit-alt"></em></a>
-
+                                                                        <div class="d-flex gap-1">
+                                                                            <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editPnlModal-{{ $item->id }}" title="Edit PNL">
+                                                                               <em class=" ni ni-edit-alt"></em>
+                                                                            </a>
+                                                                            @if($item->status == 2)
+                                                                            <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#closeTradeModal-{{ $item->id }}" title="Close Trade">
+                                                                               <em class=" ni ni-cross"></em>
+                                                                            </a>
+                                                                            @endif
+                                                                        </div>
                                                                        </td>
                                                                    </tr>
                                                                @endforeach
@@ -136,33 +143,73 @@
                                                         </div>
 
                                                      @foreach($data as $item)
-                                                            <div class="modal fade" id="modalForm-{{ $item->id }}">
+                                                            <!-- Edit PNL Modal -->
+                                                            <div class="modal fade" id="editPnlModal-{{ $item->id }}">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title">Edit Stock Profit</h5>
+                                                                            <h5 class="modal-title">Edit Trade PNL</h5>
                                                                             <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                                 <em class="icon ni ni-cross"></em>
                                                                             </a>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <form action="{{ route('admin.addStockProfit', $item->id) }}" method="POST" class="form-validate is-alter" enctype="multipart/form-data">
+                                                                            <form action="{{ route('admin.updateTradePnl', $item->id) }}" method="POST" class="form-validate is-alter">
                                                                                 @csrf
-                                                                                <h4 class="m-3">${{ number_format($item->pnl, 2) }} </h4>
+                                                                                @method('PUT')
                                                                                 <div class="form-group">
-                                                                                    <label class="form-label" for="email-address">Amount</label>
+                                                                                    <label class="form-label">Current PNL</label>
                                                                                     <div class="form-control-wrap">
-                                                                                        <input type="number" step="0.000001" name="amount" class="form-control">
+                                                                                        <input type="text" class="form-control" value="{{ number_format($item->pnl ?? 0, 2) }}%" readonly>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group">
-                                                                                    <button type="submit" name="type" value="add" class="btn btn-primary">Add</button>
+                                                                                    <label class="form-label" for="pnl">New PNL (%)</label>
+                                                                                    <div class="form-control-wrap">
+                                                                                        <input type="number" step="0.01" name="pnl" class="form-control" id="pnl" value="{{ $item->pnl ?? 0 }}" required>
+                                                                                        <small class="form-text text-muted">Enter the profit or loss percentage (positive for profit, negative for loss)</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <button type="submit" class="btn btn-primary">Update PNL</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                            <!-- Close Trade Modal -->
+                                                            @if($item->status == 2)
+                                                            <div class="modal fade" id="closeTradeModal-{{ $item->id }}">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Close Trade</h5>
+                                                                            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <em class="icon ni ni-cross"></em>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p>Are you sure you want to close this trade?</p>
+                                                                            <p><strong>User:</strong> {{ $item->user->name ?? '' }}</p>
+                                                                            <p><strong>Stock:</strong> {{ $item->stock->symbol ?? '' }}</p>
+                                                                            <p><strong>Amount:</strong> ${{ number_format($item->amount, 2) }}</p>
+                                                                            <p><strong>Current PNL:</strong> {{ number_format($item->pnl ?? 0, 2) }}%</p>
+                                                                            <form action="{{ route('admin.closeTrade', $item->id) }}" method="POST" class="mt-3">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <div class="form-group">
+                                                                                    <button type="submit" class="btn btn-danger">Close Trade</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            @endif
                                                         @endforeach
                                                 </div>
                                             </div>
