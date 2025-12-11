@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth', 'verified', 'admin'], 'prefix' => 'admin'
     Route::post('trade/profit/{id}', [StockController::class, 'addStockProfit'])->name('addStockProfit');
     Route::put('trade/pnl/{id}', [StockController::class, 'updateTradePnl'])->name('updateTradePnl');
     Route::put('trade/close/{id}', [StockController::class, 'closeTrade'])->name('closeStockTrade');
+    Route::put('trade-room/profit/{id}', [StockController::class, 'updateTradeRoomProfit'])->name('updateTradeRoomProfit');
+    Route::put('trade-room/close/{id}', [StockController::class, 'closeTradeRoom'])->name('closeTradeRoom');
     Route::delete('delete/trade/{id}', [StockController::class, 'deleteTrade'])->name('deleteTrade');
 
     Route::get('crypto/exchange/history', [CryptoExchangeController::class, 'cryptoExchange'])->name('cryptoExchange');

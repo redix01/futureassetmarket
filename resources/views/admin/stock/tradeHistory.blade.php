@@ -54,7 +54,9 @@
                                                                     <th>Pair</th>
                                                                     <th>Type</th>
                                                                     <th>Amount</th>
+                                                                    <th>Profit</th>
                                                                     <th>Status</th>
+                                                                    <th>Action</th>
                                                                </tr>
                                                                </thead>
                                                                <tbody >
@@ -66,12 +68,98 @@
                                                                        <td>{{ $item->tradePair() ?? '' }}</td>
                                                                        <td>{{ strtoupper($item->trade_type ?? '') }}</td>
                                                                        <td>${{ number_format($item->amount, 2) ?? ''}}</td>
+                                                                       <td class="{{ ($item->profit ?? 0) > 0 ? 'text-success' : (($item->profit ?? 0) < 0 ? 'text-danger' : '') }}">
+                                                                            ${{ number_format($item->profit ?? 0, 2) }}
+                                                                        </td>
                                                                        <td>{!! $item->status() !!}</td>
+                                                                       <td>
+                                                                        <div class="d-flex gap-1">
+                                                                            <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editTradeProfitModal-{{ $item->id }}" title="Edit Profit">
+                                                                               <em class=" ni ni-edit-alt"></em>
+                                                                            </a>
+                                                                            @if($item->status == 1)
+                                                                            <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#closeTradeRoomModal-{{ $item->id }}" title="Close Trade">
+                                                                               <em class=" ni ni-cross"></em>
+                                                                            </a>
+                                                                            @endif
+                                                                        </div>
+                                                                       </td>
                                                                    </tr>
                                                                @endforeach
                                                                </tbody>
                                                            </table>
                                                         </div>
+
+                                                        @foreach($tradeOrders as $item)
+                                                            <!-- Edit Trade Profit Modal -->
+                                                            <div class="modal fade" id="editTradeProfitModal-{{ $item->id }}">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Edit Trade Profit</h5>
+                                                                            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <em class="icon ni ni-cross"></em>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form action="{{ route('admin.updateTradeRoomProfit', $item->id) }}" method="POST" class="form-validate is-alter">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <div class="form-group">
+                                                                                    <label class="form-label">Current Profit</label>
+                                                                                    <div class="form-control-wrap">
+                                                                                        <input type="text" class="form-control" value="${{ number_format($item->profit ?? 0, 2) }}" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="form-label" for="profit">New Profit ($)</label>
+                                                                                    <div class="form-control-wrap">
+                                                                                        <input type="number" step="0.01" name="profit" class="form-control" id="profit" value="{{ $item->profit ?? 0 }}" required>
+                                                                                        <small class="form-text text-muted">Enter the profit or loss amount (positive for profit, negative for loss)</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <button type="submit" class="btn btn-primary">Update Profit</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Close Trade Room Modal -->
+                                                            @if($item->status == 1)
+                                                            <div class="modal fade" id="closeTradeRoomModal-{{ $item->id }}">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Close Trade</h5>
+                                                                            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <em class="icon ni ni-cross"></em>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p>Are you sure you want to close this trade?</p>
+                                                                            <p><strong>User:</strong> {{ $item->user->name ?? '' }}</p>
+                                                                            <p><strong>Market:</strong> {{ $item->market ?? '' }}</p>
+                                                                            <p><strong>Pair:</strong> {{ $item->tradePair() ?? '' }}</p>
+                                                                            <p><strong>Amount:</strong> ${{ number_format($item->amount, 2) }}</p>
+                                                                            <p><strong>Current Profit:</strong> ${{ number_format($item->profit ?? 0, 2) }}</p>
+                                                                            <form action="{{ route('admin.closeTradeRoom', $item->id) }}" method="POST" class="mt-3">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <div class="form-group">
+                                                                                    <button type="submit" class="btn btn-danger">Close Trade</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            @endif
+                                                        @endforeach
                                                 </div>
                                             </div>
                                         </div>

@@ -92,4 +92,37 @@ class StockController extends Controller
 
         return redirect()->back()->with('error', 'Only live trades can be closed.');
     }
+
+    /**
+     * Update Trade Room trade profit
+     */
+    public function updateTradeRoomProfit(Request $request, $id)
+    {
+        $request->validate([
+            'profit' => 'required|numeric',
+        ]);
+
+        $trade = Trade::findOrFail($id);
+        $trade->profit = $request->profit;
+        $trade->save();
+
+        return redirect()->back()->with('success', 'Trade profit updated successfully!');
+    }
+
+    /**
+     * Close a Trade Room trade (change status from Open to Closed)
+     */
+    public function closeTradeRoom($id)
+    {
+        $trade = Trade::findOrFail($id);
+        
+        // Only allow closing if trade is currently Open (status = 1)
+        if ($trade->status == 1) {
+            $trade->status = 2; // Set to Closed
+            $trade->save();
+            return redirect()->back()->with('success', 'Trade closed successfully!');
+        }
+
+        return redirect()->back()->with('error', 'Only open trades can be closed.');
+    }
 }
