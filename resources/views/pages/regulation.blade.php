@@ -24,7 +24,7 @@
   </p>
 
   <p class="mb-3">
-    By continuing to use {{ env('APP_NAME') }}, you acknowledge that you understand and accept the responsibilities outlined in this regulation. We encourage all users to stay informed about updates to our policy and reach out to support@futureassetmarket.com for clarifications or concerns regarding regulatory matters.
+    By continuing to use {{ env('APP_NAME') }}, you acknowledge that you understand and accept the responsibilities outlined in this regulation. We encourage all users to stay informed about updates to our policy and reach out to support@helixpointmarkets.com for clarifications or concerns regarding regulatory matters.
   </p>
 </div>
 

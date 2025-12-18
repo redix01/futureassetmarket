@@ -21,7 +21,7 @@
                         <div class="content_block_seven">
                             <div class="content-box">
                                 <div class="sec-title pb_50">
-                                    <h2>Future Asset Market</h2>
+                                    <h2>{{ env('APP_NAME') }}</h2>
                                 </div>
                                 <ul class="accordion-box">
                                     <li class="accordion block active-block">
