@@ -75,8 +75,32 @@
                 <div class="animation-preloader">
                     <div class="spinner"></div>
                     <div class="txt-loading text-center">
+                        <!-- Top Line: Future -->
+                        <div class="d-block mb-2">
+                            <span data-text-preloader="F" class="letters-loading">F</span>
+                            <span data-text-preloader="u" class="letters-loading">u</span>
+                            <span data-text-preloader="t" class="letters-loading">t</span>
+                            <span data-text-preloader="u" class="letters-loading">u</span>
+                            <span data-text-preloader="r" class="letters-loading">r</span>
+                            <span data-text-preloader="e" class="letters-loading">e</span>
+
+                            <span data-text-preloader="-" class="letters-loading">-</span>
+                            <span data-text-preloader="A" class="letters-loading">A</span>
+                            <span data-text-preloader="s" class="letters-loading">s</span>
+                            <span data-text-preloader="s" class="letters-loading">s</span>
+                            <span data-text-preloader="e" class="letters-loading">e</span>
+                            <span data-text-preloader="t" class="letters-loading">t</span>
+                        </div>
+
+                        <!-- Bottom Line: Asset Market -->
                         <div class="d-block">
-                            <span class="letters-loading">{{ env('APP_NAME') }}</span>
+                            &nbsp;
+                            <span data-text-preloader="M" class="letters-loading">M</span>
+                            <span data-text-preloader="a" class="letters-loading">a</span>
+                            <span data-text-preloader="r" class="letters-loading">r</span>
+                            <span data-text-preloader="k" class="letters-loading">k</span>
+                            <span data-text-preloader="e" class="letters-loading">e</span>
+                            <span data-text-preloader="t" class="letters-loading">t</span>
                         </div>
                     </div>
 
@@ -111,7 +135,7 @@
                 <div class="outer-box">
                     <figure class="logo-box">
                         <a href="{{route('index')}}">
-                            <img src="{{ asset('img2/logo.png') }}" alt="">
+                            <img src="{{ asset('img/helix.png') }}" alt="">
                             {{--                                 <h3 style="color: black; font-weight: bolder">{{ env('APP_NAME') }}</h3>--}}
                         </a>
                     </figure>
@@ -262,7 +286,7 @@
                 <div class="outer-box">
                     <figure class="logo-box">
                         <a href="{{ route('index') }}">
-                            <img src="{{ asset('img2/logo.png') }}" alt="">
+                            <img src="{{ asset('img/helix.png') }}" alt="">
                             {{--                                 <h3 style="color: black; font-weight: bolder">{{ env('APP_NAME') }}</h3>--}}
                         </a></figure>
                     <div class="menu-area">
@@ -286,7 +310,7 @@
         <div class="close-btn"><i class="fas fa-times"></i></div>
         <nav class="menu-box">
             <div class="nav-logo"><a href="{{ route('index') }}">
-                    <img src="{{ asset('img2/logo2.png') }}" alt="" title="">
+                    <img src="{{ asset('img/helix.png') }}" alt="" title="">
                 </a></div>
             <div class="menu-outer">
                 <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
@@ -423,7 +447,7 @@
                         </div>
                         <div class="footer-lower">
                             <figure class="footer-logo">
-                                <a href="index.html"><img src="{{ asset('img2/logo.png') }}" alt="">
+                                <a href="index.html"><img src="{{ asset('img/helix.png') }}" alt="">
                                 </a></figure>
                         </div>
                     </div>

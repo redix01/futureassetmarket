@@ -68,7 +68,7 @@
                 <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
                     <div class="brand-logo pb-4 text-center">
                         <a href="{{ route('index') }}" class="logo-link">
-                            <img src="{{ asset('img2/logo2.png') }}" height="60" alt="">
+                            <img src="{{ asset('img/helix.png') }}" height="60" alt="">
 {{--                            <h3 style="font-weight: bolder">{{ env('APP_NAME') }}</h3>--}}
                         </a>
                     </div>

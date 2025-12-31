@@ -5,7 +5,7 @@
 					<div class="uk-navbar-left">
 						<a class="uk-navbar-item uk-logo" href="{{ route('index') }}">
 {{--                            <h2 style="color: white; font-weight: bolder">{{ env('APP_NAME') }}</h2>--}}
-							<img src="{{ asset('img/logo.png') }}" alt="logo" width="200" height="80">
+							<img src="{{ asset('img/helix.png') }}" alt="logo" width="200" height="80">
 						</a>
 						<ul class="uk-navbar-nav uk-visible@m">
 

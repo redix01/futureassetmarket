@@ -26,7 +26,7 @@
         <div class="sidebar-heading">
             <a href="{{ route('index') }}">
                 {{--            <h3>{{ env('APP_NAME') }}</h3>--}}
-                <img  src="{{ asset('img2/logo2.png') }}" alt="logo" height="50">
+                <img  src="{{ asset('img/helix.png') }}" alt="logo" height="50">
             </a>
         </div>
         <nav class="sidebar mb-4">
@@ -70,8 +70,8 @@
 
                 <!-- Buy Stock Dropdown -->
                 <li class="nav-item">
-                    <a class="nav-link d-flex gap-2 align-items-center justify-content-between stock-dropdown-toggle" 
-                       href="#" data-bs-toggle="collapse" data-bs-target="#stockSubmenu" aria-expanded="false">
+                    <a class="nav-link d-flex gap-2 align-items-center justify-content-between disabled" 
+                       href="#" onclick="return false;" style="pointer-events: none; opacity: 0.6; cursor: not-allowed;">
                         <div class="d-flex gap-2 align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 14 14">
                                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -82,51 +82,11 @@
                         </div>
                         <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
                     </a>
-                    <div class="collapse" id="stockSubmenu">
-                        <ul class="nav flex-column submenu">
-                            <li class="nav-item">
-                                <a class="nav-link d-flex gap-2 align-items-center {{ Route::is('user.stocks') ? 'active' : '' }}"
-                                   href="{{ route('user.stocks') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11c5.16-1.26 9-5.45 9-11V7z"/>
-                                    </svg>
-                                    <span>Browse Stocks</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex gap-2 align-items-center {{ Route::is('user.stockHoldings') ? 'active' : '' }}"
-                                   href="{{ route('user.stockHoldings') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11c5.16-1.26 9-5.45 9-11V7z"/>
-                                    </svg>
-                                    <span>My Holdings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex gap-2 align-items-center {{ Route::is('user.filledOrders') ? 'active' : '' }}"
-                                   href="{{ route('user.filledOrders') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M9 12l2 2l4-4m6 2a9 9 0 11-18 0a9 9 0 0118 0z"/>
-                                    </svg>
-                                    <span>Buy History</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex gap-2 align-items-center {{ Route::is('user.sellHistory') ? 'active' : '' }}"
-                                   href="{{ route('user.sellHistory') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M9 12l2 2l4-4m6 2a9 9 0 11-18 0a9 9 0 0118 0z"/>
-                                    </svg>
-                                    <span>Sell History</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link d-flex gap-2 align-items-center {{ Route::is('user.cryptoExchange') ? 'active' : '' }}"
-                       href="{{ route('user.cryptoExchange') }}">
+                    <a class="nav-link d-flex gap-2 align-items-center disabled" 
+                       href="#" onclick="return false;" style="pointer-events: none; opacity: 0.6; cursor: not-allowed;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 256 256">
                             <defs>
                                 <linearGradient id="logosBitcoin0" x1="49.973%" x2="49.973%" y1="-.024%" y2="99.99%">
