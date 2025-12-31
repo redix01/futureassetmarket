@@ -75,32 +75,17 @@
                 <div class="animation-preloader">
                     <div class="spinner"></div>
                     <div class="txt-loading text-center">
-                        <!-- Top Line: Future -->
-                        <div class="d-block mb-2">
-                            <span data-text-preloader="F" class="letters-loading">F</span>
-                            <span data-text-preloader="u" class="letters-loading">u</span>
-                            <span data-text-preloader="t" class="letters-loading">t</span>
-                            <span data-text-preloader="u" class="letters-loading">u</span>
-                            <span data-text-preloader="r" class="letters-loading">r</span>
-                            <span data-text-preloader="e" class="letters-loading">e</span>
-
-                            <span data-text-preloader="-" class="letters-loading">-</span>
-                            <span data-text-preloader="A" class="letters-loading">A</span>
-                            <span data-text-preloader="s" class="letters-loading">s</span>
-                            <span data-text-preloader="s" class="letters-loading">s</span>
-                            <span data-text-preloader="e" class="letters-loading">e</span>
-                            <span data-text-preloader="t" class="letters-loading">t</span>
-                        </div>
-
-                        <!-- Bottom Line: Asset Market -->
                         <div class="d-block">
-                            &nbsp;
-                            <span data-text-preloader="M" class="letters-loading">M</span>
+                            <span data-text-preloader="L" class="letters-loading">L</span>
+                            <span data-text-preloader="o" class="letters-loading">o</span>
                             <span data-text-preloader="a" class="letters-loading">a</span>
-                            <span data-text-preloader="r" class="letters-loading">r</span>
-                            <span data-text-preloader="k" class="letters-loading">k</span>
-                            <span data-text-preloader="e" class="letters-loading">e</span>
-                            <span data-text-preloader="t" class="letters-loading">t</span>
+                            <span data-text-preloader="d" class="letters-loading">d</span>
+                            <span data-text-preloader="i" class="letters-loading">i</span>
+                            <span data-text-preloader="n" class="letters-loading">n</span>
+                            <span data-text-preloader="g" class="letters-loading">g</span>
+                            <span data-text-preloader="." class="letters-loading">.</span>
+                            <span data-text-preloader="." class="letters-loading">.</span>
+                            <span data-text-preloader="." class="letters-loading">.</span>
                         </div>
                     </div>
 
