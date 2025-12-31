@@ -67,7 +67,6 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 video-column">
                         <div class="video_block_one">
                             <div class="video-box z_1 p_relative ml_50 centred">
-                                <figure class="image-box"><img src="{{ asset('img2/banner.png') }}" alt=""></figure>
                             </div>
                         </div>
                     </div>
