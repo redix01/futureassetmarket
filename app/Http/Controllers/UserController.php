@@ -30,7 +30,6 @@ class UserController extends Controller
         $user = Auth::user();
         $withdrawal = Withdrawal::whereUserId(auth()->id())->where('status', 1)->sum('amount');
         $deposit = Deposit::whereUserId(auth()->id())->where('status', 1)->sum('amount');
-//        $invested = StockHolding::where('user_id', auth()->id())->sum('total_amount');
 
         $stocks = StockHolding::where('user_id', Auth::id())
             ->with('stock')
@@ -65,8 +64,101 @@ class UserController extends Controller
         $totalCurrentValue = $stocks->sum('current_value') ?? $totalInvested;
 
         $crypto = CryptoExchange::where('user_id', auth()->id())->sum('amount');
+        
+        // Generate Chart Data
+        $chartData = $this->generateChartData($user);
+
         return view('dashboard.index', compact('user', 'withdrawal', 'deposit',
-            'totalCurrentValue', 'totalInvested', 'crypto', 'stocks'));
+            'totalCurrentValue', 'totalInvested', 'crypto', 'stocks', 'chartData'));
+    }
+
+    private function generateChartData($user)
+    {
+        // 1. Collect all transactions with their dates and effective amounts on the balance
+        // Deposits: +amount
+        $deposits = Deposit::where('user_id', $user->id)->where('status', 1)->get()->map(function($item) {
+            return ['date' => $item->created_at, 'amount' => $item->amount];
+        });
+        
+        // Withdrawals: -amount
+        $withdrawals = Withdrawal::where('user_id', $user->id)->where('status', 1)->get()->map(function($item) {
+            return ['date' => $item->created_at, 'amount' => -$item->amount];
+        });
+        
+        // Stock Buys (deduct from balance): -amount
+        $stockBuys = \App\Models\StockOrder::where('user_id', $user->id)->where('status', 2)->get()->map(function($item) {
+            return ['date' => $item->created_at, 'amount' => -$item->amount];
+        });
+        
+        // Sell Stock (add to balance): +amount (assuming amount is the returned value)
+        $stockSells = \App\Models\SellStock::where('user_id', $user->id)->where('status', 1)->get()->map(function($item) {
+            return ['date' => $item->created_at, 'amount' => $item->amount];
+        });
+        
+        // Crypto Exchange (Assuming deposits to crypto reduce balance)
+        // If CryptoExchange 'deposit' means User deposits into Crypto Wallet -> Balance decreases?
+        // Let's assume standard flow: user creates exchange order to buy crypto -> balance decreases.
+        // Need to check CryptoExchange model usage. Assuming similar to StockBuy for now if amount is deducted.
+        // Ignoring complicated crypto flows for simplicity to avoid breaking if logic is different.
+
+        $transactions = $deposits->concat($withdrawals)->concat($stockBuys)->concat($stockSells)
+            ->sortByDesc('date');
+
+        // 2. Prepare date ranges
+        $ranges = [
+            '7D' => 7,
+            '30D' => 30,
+            '90D' => 90
+        ];
+        
+        $result = [];
+        $currentBalance = $user->balance;
+        
+        foreach ($ranges as $key => $days) {
+            $labels = [];
+            $data = [];
+            
+            $endDate = now();
+            $startDate = now()->subDays($days);
+            
+            // Working backwards from today
+            $tempBalance = $currentBalance;
+            $periodTransactions = $transactions->filter(function($t) use ($startDate) {
+                return $t['date'] >= $startDate;
+            });
+
+            // We need daily data points.
+            for ($d = 0; $d <= $days; $d++) {
+                $date = $endDate->copy()->subDays($d);
+                $dateString = $date->format('M j');
+                
+                // Transactions on this day
+                // Note: since we iterate backwards, we start with today's balance.
+                // The balance at the END of this day is $tempBalance.
+                
+                // Save point
+                if ($d < $days) { // Don't add the last one which is start date - 1 technically if we want strict range
+                   array_unshift($data, $tempBalance);
+                   array_unshift($labels, $dateString);
+                }
+
+                // Reverse calculate balance for the start of this day (which is end of previous day)
+                $dayTransactions = $periodTransactions->filter(function($item) use ($date) {
+                    return $item['date']->isSameDay($date);
+                });
+                
+                // Balance at start of day = Balance at end - sum(transactions)
+                $dayChange = $dayTransactions->sum('amount');
+                $tempBalance -= $dayChange;
+            }
+            
+            $result[$key] = [
+                'labels' => $labels,
+                'data' => $data
+            ];
+        }
+        
+        return $result;
     }
 
     public function profile()

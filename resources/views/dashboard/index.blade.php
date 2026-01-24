@@ -133,6 +133,12 @@
   color: white;
 }
 
+/* Balance Card - Warm Gradient */
+.balance-card {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  color: white;
+}
+
 .stat-content {
   flex: 1;
   position: relative;
@@ -334,6 +340,21 @@
         <!-- Stats Cards - Right Side -->
         <div class="col-lg-4">
             <div class="stats-cards">
+                <!-- Balance Card -->
+                <div class="stat-card balance-card">
+                    <div class="stat-content">
+                        <h6 class="stat-label">Available Balance</h6>
+                        <h3 class="stat-value">${{ number_format($user->balance, 2) }}</h3>
+                        <p class="stat-subtitle">Cash available</p>
+                    </div>
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="5" width="20" height="14" rx="2" />
+                            <line x1="2" y1="10" x2="22" y2="10" />
+                        </svg>
+                    </div>
+                </div>
+
                 <!-- Total Profit Card -->
                 <div class="stat-card profit-card">
                     <div class="stat-content">
@@ -505,20 +526,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let chart;
     
     // Sample data for different timeframes
-    const chartDataSets = {
-        '7D': {
-            labels: ['Jul 15', 'Jul 16', 'Jul 17', 'Jul 18', 'Jul 19', 'Jul 20', 'Jul 21'],
-            data: [444000, 442000, 440000, 442000, 444000, 446000, 440000]
-        },
-        '30D': {
-            labels: ['Jun 22', 'Jun 24', 'Jun 26', 'Jun 28', 'Jun 30', 'Jul 2', 'Jul 4', 'Jul 6', 'Jul 8', 'Jul 10', 'Jul 12', 'Jul 14', 'Jul 16', 'Jul 18', 'Jul 20'],
-            data: [405000, 410000, 415000, 420000, 425000, 430000, 435000, 440000, 442000, 445000, 442000, 444000, 442000, 444000, 446000]
-        },
-        '90D': {
-            labels: ['Jun 21', 'Jun 22', 'Jun 23', 'Jun 24', 'Jun 25', 'Jun 26', 'Jun 27', 'Jun 28', 'Jun 29', 'Jun 30', 'Jul 1', 'Jul 2', 'Jul 3', 'Jul 4', 'Jul 5', 'Jul 6', 'Jul 7', 'Jul 8', 'Jul 9', 'Jul 10', 'Jul 11', 'Jul 12', 'Jul 13', 'Jul 14', 'Jul 15', 'Jul 16', 'Jul 17', 'Jul 18', 'Jul 19', 'Jul 20', 'Jul 21'],
-            data: [402000, 405000, 408000, 410000, 412000, 415000, 418000, 415000, 420000, 422000, 425000, 428000, 430000, 432000, 435000, 438000, 440000, 442000, 441000, 443000, 445000, 442000, 440000, 442000, 444000, 442000, 440000, 442000, 444000, 446000, 440000]
-        }
-    };
+    const chartDataSets = @json($chartData);
     
     // Chart initialization
     const ctx = document.getElementById('balanceChart').getContext('2d');
