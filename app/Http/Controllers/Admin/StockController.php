@@ -120,6 +120,16 @@ class StockController extends Controller
         if ($trade->status == 1) {
             $trade->status = 2; // Set to Closed
             $trade->save();
+
+            if ($trade->acct_type == 'Live') {
+                $user = User::find($trade->user_id);
+                if ($user) {
+                    $user->balance += $trade->amount + $trade->profit;
+                    $user->profit += $trade->profit;
+                    $user->save();
+                }
+            }
+
             return redirect()->back()->with('success', 'Trade closed successfully!');
         }
 
