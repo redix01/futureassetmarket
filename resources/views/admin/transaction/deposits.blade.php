@@ -52,6 +52,7 @@
                                                       <td>
                                                           @if($item->status == 0)
                                                               <a href="{{ route('admin.approveDeposit', $item->id) }}" class="btn btn-sm btn-success"><em class="icon ni ni-check"></em></a>
+                                                              <a href="{{ route('admin.declineDeposit', $item->id) }}" class="btn btn-sm btn-danger"><em class="icon ni ni-cross"></em></a>
                                                           @endif
                                                           <a  class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#buy-coin-{{ $item->id }}">
                                                              <em class="icon ni ni-eye"></em>

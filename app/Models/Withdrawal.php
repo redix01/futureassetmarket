@@ -23,6 +23,8 @@ class Withdrawal extends Model
         if ($this->status == 1)
         {
             return '<span class="badge bg-success">Successful</span>';
+        }elseif ($this->status == 2){
+            return '<span class="badge bg-danger">Declined</span>';
         }
         return '<span class="badge bg-warning">Pending</span>';
     }
@@ -32,6 +34,8 @@ class Withdrawal extends Model
         if ($this->status == 1)
         {
             return '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">Approved</span>';
+        }elseif ($this->status == 2){
+            return '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-red-100 dark:bg-gray-700 dark:border-red-300 dark:text-red-300">Declined</span>';
         }
         return '<span class="bg-orange-100 text-orange-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-orange-100 dark:bg-gray-700 dark:border-orange-300 dark:text-orange-300">Pending</span>';
     }

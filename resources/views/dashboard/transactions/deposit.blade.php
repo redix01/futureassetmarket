@@ -124,6 +124,8 @@
                                             <td>
                                                 @if($item->status == 0)
                                                     <span class="badge bg-warning">Pending</span>
+                                                @elseif($item->status == 2)
+                                                    <span class="badge bg-danger">Declined</span>
                                                 @else
                                                     <span class="badge bg-success">Successful</span>
                                                 @endif

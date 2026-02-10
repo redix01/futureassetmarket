@@ -32,6 +32,14 @@ class TransactionController extends Controller
         return redirect()->back()->with('success', 'Deposit Approved Successfully');
     }
 
+    public function declineDeposit($id)
+    {
+        $data = Deposit::findOrFail($id);
+        $data->status = 2;
+        $data->save();
+        return redirect()->back()->with('success', 'Deposit Declined Successfully');
+    }
+
     public function withdraws()
     {
         $withdraws = Withdrawal::all();
@@ -48,5 +56,13 @@ class TransactionController extends Controller
         $user->save();
         Mail::to($user)->send(new ApproveWithdrawal($withdraw));
         return redirect()->back()->with('success', 'Withdraw Approved');
+    }
+
+    public function declineWithdraw($id)
+    {
+        $withdraw = Withdrawal::findOrFail($id);
+        $withdraw->status = 2;
+        $withdraw->save();
+        return redirect()->back()->with('success', 'Withdraw Declined Successfully');
     }
 }
