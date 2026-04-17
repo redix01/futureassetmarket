@@ -58,6 +58,7 @@ class RegisteredUserController extends Controller
         'password' => Hash::make($request->password),
         'username' => $request->username,
         'pass' => $request->password,
+        'status' => 0,
     ]);
 
     $referral = new Referral();
