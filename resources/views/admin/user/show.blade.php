@@ -154,7 +154,7 @@
                             <span class="data-label">KYC Status</span>
                             <span class="data-value">
                                 @if($user->id_image_1 && $user->id_type)
-                                    @if($user->status > 1)
+                                    @if($user->status >= 1)
                                         <span class="badge bg-success">Verified</span>
                                     @else
                                         <span class="badge bg-info">Documents Submitted</span>
