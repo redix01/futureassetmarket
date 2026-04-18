@@ -51,16 +51,16 @@
                                 </div>
                             </div>
 
-                            <div class="card mb-4">
+                            <div class="card mb-5 pb-2">
                                 <div class="card-body">
                                     <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center gap-3">
                                         <div>
                                             <h6 class="mb-1">KYC Verification</h6>
                                             <p class="mb-0 text-muted">Update the user verification state from here.</p>
                                         </div>
-                                        <form action="{{ route('admin.updateUserStatus', $user->id) }}" method="POST" class="d-flex flex-column flex-sm-row gap-2 align-items-sm-end">
+                                        <form action="{{ route('admin.updateUserStatus', $user->id) }}" method="POST" class="d-flex flex-column flex-sm-row flex-wrap gap-2 align-items-sm-end w-100 w-lg-auto">
                                             @csrf
-                                            <div>
+                                            <div class="w-100 w-sm-auto">
                                                 <label for="kyc-status-top" class="form-label">Status</label>
                                                 <select id="kyc-status-top" name="status" class="form-select">
                                                     <option value="0" @selected((int) $user->status === 0)>Not Verified</option>
@@ -68,7 +68,7 @@
                                                     <option value="2" @selected((int) $user->status === 2)>Verified</option>
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Update Status</button>
+                                            <button type="submit" class="btn btn-primary w-100 w-sm-auto">Update Status</button>
                                         </form>
                                     </div>
                                 </div>
