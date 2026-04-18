@@ -26,9 +26,22 @@ class UserController extends Controller
     public function verifyUser($id)
     {
         $user = User::findOrFail($id);
-        $user->status = 1;
+        $user->status = 2;
         $user->save();
         return redirect()->back()->with('success', 'User Verified Successfully');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'status' => ['required', 'integer', 'in:0,1,2'],
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->status = (int) $validated['status'];
+        $user->save();
+
+        return redirect()->back()->with('success', 'User verification status updated successfully.');
     }
 
     public function fundUser(Request $request, $id)

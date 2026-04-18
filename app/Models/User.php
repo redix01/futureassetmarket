@@ -50,10 +50,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function status()
     {
-        if ($this->status >= 1) {
-            return '<span class="badge bg-success">Verified</span>';
-        }
-        return '<span class="badge bg-danger">Not Verified</span>';
+        return match ((int) $this->status) {
+            2 => '<span class="badge bg-success">Verified</span>',
+            1 => '<span class="badge bg-warning text-dark">In Review</span>',
+            default => '<span class="badge bg-danger">Not Verified</span>',
+        };
     }
 
     public function deposits()

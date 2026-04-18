@@ -36,23 +36,20 @@
                                     {{ session()->get('success') }}
                                 </div>
                             @endif
-                            @if($user->status == 0)
-                               <div class="alert alert-warning">
+                            @php
+                                $verificationAlerts = [
+                                    2 => ['success', 'This Account is verified.'],
+                                    1 => ['warning', 'This Account is in review.'],
+                                ];
+                                [$alertClass, $alertMessage] = $verificationAlerts[$user->status] ?? ['danger', 'This Account has not been verified.'];
+                            @endphp
+                            <div class="alert alert-{{ $alertClass }}">
                                 <div class="alert-cta flex-wrap flex-md-nowrap">
                                     <div class="alert-text">
-                                        <p>This Account has not been verified.</p>
+                                        <p>{{ $alertMessage }}</p>
                                     </div>
                                 </div>
                             </div>
-                            @else
-                            <div class="alert alert-success">
-                                <div class="alert-cta flex-wrap flex-md-nowrap">
-                                    <div class="alert-text">
-                                        <p>This Account is verified.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
 
                         <div class="nk-block-des">
 {{--                            <p>Basic info, like your name and address, that you use on Nio Platform.</p>--}}
@@ -152,18 +149,23 @@
                     <div class="data-item">
                         <div class="data-col">
                             <span class="data-label">KYC Status</span>
-                            <span class="data-value">
-                                @if($user->id_image_1 && $user->id_type)
-                                    @if($user->status >= 1)
-                                        <span class="badge bg-success">Verified</span>
-                                    @else
-                                        <span class="badge bg-info">Documents Submitted</span>
-                                        <a href="{{ route('admin.verifyUser', $user->id) }}" class="btn btn-sm btn-success ms-2">Verify KYC</a>
-                                    @endif
-                                @else
-                                    <span class="badge bg-warning">Pending</span>
-                                @endif
-                            </span>
+                            <div class="d-flex flex-column gap-3">
+                                <div class="data-value">{!! $user->status() !!}</div>
+                                <form action="{{ route('admin.updateUserStatus', $user->id) }}" method="POST" class="row g-2 align-items-end">
+                                    @csrf
+                                    <div class="col-md-4">
+                                        <label for="kyc-status" class="form-label">Set verification status</label>
+                                        <select id="kyc-status" name="status" class="form-select">
+                                            <option value="0" @selected((int) $user->status === 0)>Not Verified</option>
+                                            <option value="1" @selected((int) $user->status === 1)>In Review</option>
+                                            <option value="2" @selected((int) $user->status === 2)>Verified</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-primary w-100">Update Status</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-3">
