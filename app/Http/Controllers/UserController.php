@@ -223,10 +223,19 @@ class UserController extends Controller
     public function kycform()
     {
         $user = Auth::user();
+        if ((int) $user->status !== 0) {
+            return redirect()->route('user.kycStart');
+        }
+
         return view('dashboard.user.kyc', compact('user'));
     }
     public function submitKyc(Request $request)
     {
+        $user = Auth::user();
+        if ((int) $user->status !== 0) {
+            return redirect()->route('user.kycStart')->with('success', 'Your KYC is already under review or verified.');
+        }
+
         $request->validate([
             'phone' => 'nullable|string|max:20',
             'telegram' => 'nullable|string|max:255',
@@ -238,8 +247,6 @@ class UserController extends Controller
             'id_image_2' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
-        $user = Auth::user();
 
         $user->fill($request->only([
             'phone', 'telegram',

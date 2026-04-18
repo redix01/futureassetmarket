@@ -19,23 +19,24 @@
             <div class="col-xl-12 col-xxl-12">
                 <div class="mainchart px-3 px-md-4 py-3 py-lg-4 ">
                     <div class="col-lg-10 offset-lg-1">
-                        <form action="{{ route('user.submitKyc') }}" method="POST" enctype="multipart/form-data">
-                            @if(session()->has('success'))
-                                <div class="alert alert-success">
-                                    {{ session()->get('success') }}
-                                </div>
-                            @endif
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            @csrf
-                            <div class="row g-3">
+                        @if((int) $user->status === 0)
+                            <form action="{{ route('user.submitKyc') }}" method="POST" enctype="multipart/form-data">
+                                @if(session()->has('success'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('success') }}
+                                    </div>
+                                @endif
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @csrf
+                                <div class="row g-3">
                                 <!-- Name -->
                                 <div class="col-md-6">
                                     <label class="form-label">Full Name</label>
@@ -104,12 +105,29 @@
                                     <input type="file" name="id_image_2" class="form-control">
                                 </div>
 
-                            </div>
+                                </div>
 
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary">Submit KYC</button>
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-primary">Submit KYC</button>
+                                </div>
+                            </form>
+                        @else
+                            <div class="alert alert-{{ (int) $user->status === 2 ? 'success' : 'warning' }} mb-0">
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="fw-semibold">{!! $user->status() !!}</div>
+                                    <div>
+                                        @if((int) $user->status === 2)
+                                            Your account is already verified. You do not need to submit KYC again.
+                                        @else
+                                            Your KYC documents are under review. You cannot submit again at this stage.
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('user.dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                        @endif
                     </div>
 
 
