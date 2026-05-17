@@ -261,10 +261,15 @@ class UserController extends Controller
             $user->id_image_2 = $request->file('id_image_2')->store('files', 'public');
         }
 
+        if ($request->hasFile('avatar')) {
+            $user->avatar = $request->file('avatar')->store('files', 'public');
+        }
+
+        $user->status = 1;
 
         $user->save();
 
-        return redirect()->back()->with('success', 'KYC details submitted successfully.');
+        return redirect()->route('user.kycStart')->with('success', 'KYC details submitted successfully and are now under review.');
     }
 
 
