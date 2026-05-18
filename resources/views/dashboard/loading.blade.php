@@ -83,7 +83,7 @@
 <div class="loading-container">
     <div class="spinner"></div>
     <div class="brand-loading" aria-label="Future Asset Market loading">
-        <span>F</span><span>U</span><span>T</span><span>U</span><span>R</span><span>E</span><span>A</span><span>S</span><span>S</span><span>E</span><span>T</span><span>M</span><span>A</span><span>R</span><span>K</span><span>E</span><span>T</span>
+        <span>F</span><span>U</span><span>T</span><span>U</span><span>R</span><span>E</span><span>A</span><span>S</span><span>S</span><span>E</span><span>T</span><br><span>M</span><span>A</span><span>R</span><span>K</span><span>E</span><span>T</span>
     </div>
     <p class="loading-text">Please wait while Future Asset Market loads your dashboard...</p>
 </div>
