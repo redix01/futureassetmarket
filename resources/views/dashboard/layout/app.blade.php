@@ -26,7 +26,7 @@
         <div class="sidebar-heading">
             <a href="{{ route('index') }}">
                 {{--            <h3>{{ env('APP_NAME') }}</h3>--}}
-                <img  src="{{ asset('img/helix.png') }}" alt="logo" height="50">
+                <img  src="{{ asset('img2/logo.png') }}" alt="Future Asset Market logo" height="50">
             </a>
         </div>
         <nav class="sidebar mb-4">

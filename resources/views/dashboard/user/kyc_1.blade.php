@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center pt-4 mt-5">
-                                        <p>If you have any question, please contact our support team <a href="https://helixpointmarkets.com" target="_blank" rel="noopener noreferrer">helixpointmarkets.com</a></p>
+                                        <p>If you have any question, please contact our support team <a href="https://futureassetmarket.com" target="_blank" rel="noopener noreferrer">futureassetmarket.com</a></p>
                                     </div>
                                 </div><!-- nk-block -->
                             </div><!-- kyc-app -->

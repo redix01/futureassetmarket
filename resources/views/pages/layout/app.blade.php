@@ -76,16 +76,23 @@
                     <div class="spinner"></div>
                     <div class="txt-loading text-center">
                         <div class="d-block">
-                            <span data-text-preloader="L" class="letters-loading">L</span>
-                            <span data-text-preloader="o" class="letters-loading">o</span>
-                            <span data-text-preloader="a" class="letters-loading">a</span>
-                            <span data-text-preloader="d" class="letters-loading">d</span>
-                            <span data-text-preloader="i" class="letters-loading">i</span>
-                            <span data-text-preloader="n" class="letters-loading">n</span>
-                            <span data-text-preloader="g" class="letters-loading">g</span>
-                            <span data-text-preloader="." class="letters-loading">.</span>
-                            <span data-text-preloader="." class="letters-loading">.</span>
-                            <span data-text-preloader="." class="letters-loading">.</span>
+                            <span data-text-preloader="F" class="letters-loading">F</span>
+                            <span data-text-preloader="U" class="letters-loading">U</span>
+                            <span data-text-preloader="T" class="letters-loading">T</span>
+                            <span data-text-preloader="U" class="letters-loading">U</span>
+                            <span data-text-preloader="R" class="letters-loading">R</span>
+                            <span data-text-preloader="E" class="letters-loading">E</span>
+                            <span data-text-preloader="A" class="letters-loading">A</span>
+                            <span data-text-preloader="S" class="letters-loading">S</span>
+                            <span data-text-preloader="S" class="letters-loading">S</span>
+                            <span data-text-preloader="E" class="letters-loading">E</span>
+                            <span data-text-preloader="T" class="letters-loading">T</span>
+                            <span data-text-preloader="M" class="letters-loading">M</span>
+                            <span data-text-preloader="A" class="letters-loading">A</span>
+                            <span data-text-preloader="R" class="letters-loading">R</span>
+                            <span data-text-preloader="K" class="letters-loading">K</span>
+                            <span data-text-preloader="E" class="letters-loading">E</span>
+                            <span data-text-preloader="T" class="letters-loading">T</span>
                         </div>
                     </div>
 
@@ -120,7 +127,7 @@
                 <div class="outer-box">
                     <figure class="logo-box">
                         <a href="{{route('index')}}">
-                            <img src="{{ asset('img/helix.png') }}" alt="">
+                            <img src="{{ asset('img2/logo.png') }}" alt="Future Asset Market">
                             {{--                                 <h3 style="color: black; font-weight: bolder">{{ env('APP_NAME') }}</h3>--}}
                         </a>
                     </figure>
@@ -271,7 +278,7 @@
                 <div class="outer-box">
                     <figure class="logo-box">
                         <a href="{{ route('index') }}">
-                            <img src="{{ asset('img/helix.png') }}" alt="">
+                            <img src="{{ asset('img2/logo.png') }}" alt="Future Asset Market">
                             {{--                                 <h3 style="color: black; font-weight: bolder">{{ env('APP_NAME') }}</h3>--}}
                         </a></figure>
                     <div class="menu-area">
@@ -295,7 +302,7 @@
         <div class="close-btn"><i class="fas fa-times"></i></div>
         <nav class="menu-box">
             <div class="nav-logo"><a href="{{ route('index') }}">
-                    <img src="{{ asset('img/helix.png') }}" alt="" title="">
+                    <img src="{{ asset('img2/logo.png') }}" alt="Future Asset Market" title="Future Asset Market">
                 </a></div>
             <div class="menu-outer">
                 <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
@@ -432,7 +439,7 @@
                         </div>
                         <div class="footer-lower">
                             <figure class="footer-logo">
-                                <a href="index.html"><img src="{{ asset('img/helix.png') }}" alt="">
+                                <a href="index.html"><img src="{{ asset('img2/logo.png') }}" alt="Future Asset Market">
                                 </a></figure>
                         </div>
                     </div>

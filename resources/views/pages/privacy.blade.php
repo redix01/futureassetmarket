@@ -29,7 +29,7 @@
                     in relation to this Policy. If you have any questions about this Policy, including any requests to
                     exercise your legal rights, please contact the DPO using the details set out below:</p>
                 <p><strong>Attn:</strong> Data Protection Officer<br>
-                    <strong>Email:</strong> support@helixpointmarkets.com</p>
+                    <strong>Email:</strong> support@futureassetmarket.com</p>
 
                 <h3 style="margin-top: 30px;">3. Scope of this Privacy Policy</h3>
                 <p>3.1 This Policy (together with our Terms and Conditions and any other documents referred to in it)
@@ -211,7 +211,7 @@
   </ul>
   <p><strong>8.2</strong> In some cases, we may also have a legal obligation to collect personal information from you or may otherwise need the personal information to protect vital interests.</p>
   <p><strong>8.3</strong> Where we rely on consent, if you don’t give us your consent or withdraw your consent, we may not be able to provide you with the products or services you ask for.</p>
-  <p><strong>8.4</strong> You can withdraw your consent at any time. To withdraw your consent, please email <strong>support@helixpointmarkets.com</strong> in the first instance.</p>
+  <p><strong>8.4</strong> You can withdraw your consent at any time. To withdraw your consent, please email <strong>support@futureassetmarket.com</strong> in the first instance.</p>
 
   <h3>9. Incomplete or inaccurate information</h3>
   <p><strong>9.1</strong> If you provide us with incomplete or inaccurate information, we may not be able to provide you with the products or services that you ask for. You can change your contact details at any time by updating your profile within your account.</p>

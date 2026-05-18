@@ -89,7 +89,7 @@
                         <div class="single-info">
                             <div class="icon-box"><i class="icon-46"></i></div>
                             <h4>Email Address</h4>
-                            <p><a href="mailto:support@helixpointmarkets.com">support@helixpointmarkets.com</a>
+                            <p><a href="mailto:support@futureassetmarket.com">support@futureassetmarket.com</a>
                             </p>
                         </div>
                     </div>
